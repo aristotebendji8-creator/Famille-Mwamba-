@@ -1,0 +1,73 @@
+<!-- ========================= -->
+<!-- FICHIER : index.html -->
+<!-- ========================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famille Mwamba</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-box">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="logo">
+    <h1>Famille Mwamba</h1>
+    <p>Plate-forme familiale sécurisée</p>
+  </div>
+
+  <!-- CONNEXION -->
+  <div class="card" id="loginCard">
+    <h2>Connexion</h2>
+
+    <input type="text" id="loginPhone" placeholder="Numéro de téléphone">
+
+    <input type="password" id="loginPassword" placeholder="Mot de passe">
+
+    <button onclick="login()">Se connecter</button>
+  </div>
+
+  <!-- AJOUT MEMBRE -->
+  <div class="card">
+    <h2>Ajouter un membre</h2>
+
+    <input type="text" id="name" placeholder="Nom complet">
+
+    <input type="text" id="phone" placeholder="Numéro de téléphone">
+
+    <input type="password" id="password" placeholder="Créer mot de passe">
+
+    <select id="role">
+      <option value="membre">Membre</option>
+      <option value="leader">Leader</option>
+    </select>
+
+    <button onclick="addMember()">Ajouter</button>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="card profile-card">
+    <h2>Profil</h2>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile">
+
+    <h3 id="profileName">Aucun utilisateur</h3>
+
+    <p id="profileRole">Rôle : ---</p>
+  </div>
+
+  <!-- LISTE -->
+  <div class="card">
+    <h2>Membres</h2>
+
+    <ul id="memberList"></ul>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
