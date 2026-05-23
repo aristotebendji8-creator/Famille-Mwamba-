@@ -159,29 +159,20 @@ li{
 
 let currentUser = null;
 
-let members = JSON.parse(localStorage.getItem("members")) || [
+let members = [
 
   {
-    id: 1,
-
-    name: "Administrateur",
-
-    phone: "0993261118",
-
-    password: "123456",
-
-    role: "admin",
-
-    approved: true,
-
+    id:1,
+    name:"Administrateur",
+    phone:"0999999999",
+    password:"admin123",
+    role:"admin",
+    approved:true,
     online:false,
-
-    profile:
-    "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+    profile:"https://cdn-icons-png.flaticon.com/512/149/149071.png"
   }
 
 ];
-
 function renderMembers(){
   const list = document.getElementById("memberList");
   list.innerHTML = "";
