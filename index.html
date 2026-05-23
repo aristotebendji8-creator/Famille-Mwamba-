@@ -1,0 +1,1463 @@
+<!-- ========================= -->
+<!-- FICHIER : index.html -->
+<!-- ========================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famille Mwamba</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-box">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="logo">
+    <h1>Famille Mwamba</h1>
+    <p>Plate-forme familiale sécurisée</p>
+  </div>
+
+  <!-- CONNEXION -->
+  <div class="card" id="loginCard">
+    <h2>Connexion</h2>
+
+    <input type="text" id="loginPhone" placeholder="Numéro de téléphone">
+
+    <input type="password" id="loginPassword" placeholder="Mot de passe">
+
+    <button onclick="login()">Se connecter</button>
+  </div>
+
+  <!-- AJOUT MEMBRE -->
+  <div class="card">
+    <h2>Ajouter un membre</h2>
+
+    <input type="text" id="name" placeholder="Nom complet">
+
+    <input type="text" id="phone" placeholder="Numéro de téléphone">
+
+    <input type="password" id="password" placeholder="Créer mot de passe">
+
+    <select id="role">
+      <option value="membre">Membre</option>
+      <option value="leader">Leader</option>
+    </select>
+
+    <button onclick="addMember()">Ajouter</button>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="card profile-card">
+    <h2>Profil</h2>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile">
+
+    <h3 id="profileName">Aucun utilisateur</h3>
+
+    <p id="profileRole">Rôle : ---</p>
+  </div>
+
+  <!-- LISTE -->
+  <div class="card">
+    <h2>Membres</h2>
+
+    <ul id="memberList"></ul>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>/* ========================= */
+/* FICHIER : style.css */
+/* ========================= */
+
+body{
+  margin:0;
+  padding:0;
+  background:#0f172a;
+  font-family:Arial;
+  color:white;
+}
+
+.container{
+  width:90%;
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+}
+
+.logo-box{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.logo{
+  width:90px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-top:0;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+}
+
+li{
+  background:#334155;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.profile-card{
+  text-align:center;
+}
+
+.profile{
+  width:90px;
+  border-radius:50%;
+  margin-top:/* ========================= */
+/* FICHIER : script.js */
+/* ========================= */
+
+let members = [
+  {
+    name:"Administrateur",
+    phone:"0999999999",
+    password:"admin123",
+    role:"admin"
+  }
+];
+
+function renderMembers(){
+  const list = document.getElementById("memberList");
+  list.innerHTML = "";
+
+  members.forEach(member => {
+    list.innerHTML += `
+      <li>
+        <strong>${member.name}</strong><br>
+        ${member.phone}<br>
+        Rôle : ${member.role}
+      </li>
+    `;
+  });
+}
+
+renderMembers();
+
+function addMember(){
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
+  const role = document.getElementById("role").value;
+
+  if(name === "" || phone === "" || password === ""){
+    alert("Remplissez tous les champs");
+    return;
+  }
+
+  members.push({
+    name,
+    phone,
+    password,
+    role
+  });
+
+  renderMembers();
+
+  alert("Membre ajouté avec succès");
+
+  document.getElementById("name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("password").value = "";
+}
+
+function login(){
+
+  const phone = document.getElementById("loginPhone").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const user = members.find(member =>
+    member.phone === phone &&
+    member.password === password
+  );
+
+  if(user){
+
+    document.getElementById("profileName").innerText = user.name;
+    document.getElementById("profileRole").innerText = "Rôle : " + user.role;
+
+    alert("Connexion réussie");
+
+  }else{
+    alert("Numéro ou mot de passe <!-- ===================================== -->
+<!-- AJOUTER APRÈS LA SECTION PROFIL -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Tableau de bord</h2>
+
+  <div class="dashboard">
+
+    <div class="box">
+      <h3 id="totalMembers">0</h3>
+      <p>Membres</p>
+    </div>
+
+    <div class="box">
+      <h3 id="totalLeaders">0</h3>
+      <p>Leaders</p>
+    </div>
+
+    <div class="box">
+      <h3 id="pendingMembers">0</h3>
+      <p>En attente</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- CHAT FAMILIAL -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Discussion Familiale</h2>
+
+  <div id="chatBox" class="chat-box"></div>
+
+  <input
+    type="text"
+    id="messageInput"
+    placeholder="Écrire un message..."
+  >
+
+  <button onclick="sendMessage()">
+    Envoyer
+  </button>
+
+</div>/* ===================================== */
+/* AJOUTER DANS style.css */
+/* ===================================== */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.box{
+  background:#334155;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+}
+
+.box h3{
+  margin:0;
+  font-size:28px;
+}
+
+.chat-box{
+  background:#0f172a;
+  height:250px;
+  overflow-y:auto;
+  padding:10px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.message{
+  background:#334155;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.message strong{
+  color:#<!-- AJOUTER SOUS LE PROFIL -->
+
+<button onclick="logout()">
+  Déconnexion
+<//* ===================================== */
+/* DÉCONNEXION */
+/* ===================================== */
+
+function logout(){
+
+  currentUser = null;
+
+  document.getElementById("profileName").innerText =
+    "Aucun utilisateur";
+
+  document.getElementById("profileRole").innerText =
+    "Rôle : ---";
+
+  document.getElementById("profileImage").src =
+    "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+  alert("<!-- ===================================== -->
+<!-- AJOUTER AVANT </body> -->
+<!-- ===================================== -->
+
+<div id="notification" class="notification">
+  Bienvenue sur Famille Mwamba
+<//* ===================================== */
+/* AJOUTER DANS style.css */
+/* ===================================== */
+
+.notification{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#22c55e;
+  color:white;
+  padding:15px;
+  border-radius:10px;
+  display:none;
+  z-index:999;
+  font-weight:bold;
+}
+
+.online{
+  color:lime;
+  font-size:14px;
+}
+
+.offline{
+  color:red;
+  font-size:14px;
+}
+
+.delete-btn{
+  background:red;
+  margin-top:10px;
+}
+
+.admin-badge{
+  background:#2563eb;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.leader-badge{
+  background:orange;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.member-badge{
+  background:gray;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:/* ===================================== */
+/* AJOUTER DANS script.js */
+/* ===================================== */
+
+/* NOTIFICATION */
+function showNotification(text){
+
+  const notification =
+    document.getElementById("notification");
+
+  notification.innerText = text;
+
+  notification.style.display = "block";
+
+  setTimeout(() => {
+    notification.style.display = "none";
+  },3000);
+}
+
+/* STATUT EN LIGNE */
+function setOnlineStatus(){
+
+  if(currentUser){
+
+    currentUser.online = true;
+
+    const index = members.findIndex(
+      member => member.id === currentUser.id
+    );
+
+    members[index] = currentUser;
+
+    saveMembers();
+  }
+}
+
+/* HORS LIGNE */
+window.addEventListener("beforeunload",()=>{
+
+  if(currentUser){
+
+    currentUser.online = false;
+
+    const index = members.findIndex(
+      member => member.id === currentUser.id
+    );
+
+    members[index] = currentUser;
+
+    saveMembers();
+  }
+});
+
+/* SUPPRIMER MEMBRE */
+function deleteMember(id){
+
+  if(!currentUser ||
+     currentUser.role !== "admin"){
+    return;
+  }
+
+  const confirmDelete =
+    confirm("Supprimer ce membre ?");
+
+  if(confirmDelete){
+
+    members = members.filter(
+      member => member.id !== id
+    );
+
+    saveMembers();
+
+    renderMembers();
+
+    updateDashboard();
+
+    showNotification(
+      "Membre supprimé"
+    );
+  }
+}
+
+/* BADGE ROLE */
+function getRoleBadge(role){
+
+  if(role === "admin"){
+    return `<span class="admin-badge">
+      ADMIN
+    </span>`;
+  }
+
+  if(role === "leader"){
+    return `<span class="leader-badge">
+      LEADER
+    </span>`;
+  }
+
+  return `<span class="member-badge">
+    MEMBRE
+  </span>`;
+}
+
+/* NOUVEL AFFICHAGE */
+function renderMembers(){
+
+  const list =
+    document.getElementById("memberList");
+
+  list.innerHTML = "";
+
+  members.forEach(member => {
+
+    list.innerHTML += `
+
+      <li>
+
+        <img
+          src="${member.profile}"
+          style="
+          width:60px;
+          height:60px;
+          border-radius:50%;
+          object-fit:cover;
+        ">
+
+        <br><br>
+
+        <strong>${member.name}</strong>
+
+        <br><br>
+
+        ${getRoleBadge(member.role)}
+
+        <br><br>
+
+        ${member.phone}
+
+        <br>
+
+        ${
+          member.online
+          ? `<span class="online">
+              ● En ligne
+            </span>`
+          : `<span class="offline">
+              ● Hors ligne
+            </span>`
+        }
+
+        <br><br>
+
+        ${
+          currentUser &&
+          currentUser.role === "admin" &&
+          !member.approved
+
+          ? `
+          <button
+            onclick="approveMember(${member.id})">
+            Autoriser
+          </button>
+          `
+          : ""
+        }
+
+        ${
+          currentUser &&
+          currentUser.role === "admin" &&
+          member.role !== "admin"
+
+          ? `
+          <button
+            class="delete-btn"
+            onclick="deleteMember(${member.id})">
+            Supprimer
+          </button>
+          `
+          : ""
+        }
+
+      </li>
+    `;
+  });
+}
+
+/* MODIFIER LOGIN */
+function login(){
+
+  const phone =
+    document.getElementById(
+      "loginPhone"
+    ).value;
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+  const user = members.find(
+    member =>
+      member.phone === phone &&
+      member.password === password
+  );
+
+  if(!user){
+    showNotification(
+      "Informations incorrectes"
+    );
+    return;
+  }
+
+  if(!user.approved){
+    showNotification(
+      "Compte non autorisé"
+    );
+    return;
+  }
+
+  currentUser = user;
+
+  setOnlineStatus();
+
+  document.getElementById(
+    "profileName"
+  ).innerText = user.name;
+
+  document.getElementById(
+    "profileRole"
+  ).innerText =
+    "Rôle : " + user.role;
+
+  document.getElementById(
+    "profileImage"
+  ).src = user.profile;
+
+  renderMembers();
+
+  updateDashboard();
+
+  showNotification(
+    "Connexion réussie"
+  );
+}
+
+/* AJOUT MEMBRE VERSION AVANCÉE */
+function addMember(){
+
+  if(!currentUser ||
+     currentUser.role !== "admin"){
+
+    showNotification(
+      "Accès refusé"
+    );
+
+    return;
+  }
+
+  const name =
+    document.getElementById("name").value;
+
+  const phone =
+    document.getElementById("phone").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const role =
+    document.getElementById("role").value;
+
+  if(
+    name === "" ||
+    phone === "" ||
+    password === ""
+  ){
+
+    showNotification(
+      "Complète les champs"
+    );
+
+    return;
+  }
+
+  const exist = members.find(
+    member => member.phone === phone
+  );
+
+  if(exist){
+
+    showNotification(
+      "Numéro déjà utilisé"
+    );
+
+    return;
+  }
+
+  members.push({
+    id: Date.now(),
+    name,
+    phone,
+    password,
+    role,
+    approved:false,
+    online:false,
+    profile:
+    "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  });
+
+  saveMembers();
+
+  renderMembers();
+
+  updateDashboard();
+
+  showNotification(
+    "Membre ajouté"
+  );
+
+  document.getElementById("name").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("password").value="";
+}
+
+/* LANCEMENT */
+renderMembers();
+updateDashboard();
+renderMessages();<!-- ===================================== -->
+<!-- AJOUTER CETTE PARTIE DANS index.html -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Activation Premium</h2>
+
+  <div class="premium-box">
+
+    <h3>Compte Premium Famille Mwamba</h3>
+
+    <p>
+      Pour accéder à toutes les fonctionnalités,
+      chaque membre doit activer son compte.
+    </p>
+
+    <div class="money-card">
+
+      <h1>0.2000 USD</h1>
+
+      <p>Paiement automatique intégré</p>
+
+      <strong>0993261118</strong>
+
+    </div>
+
+    <button onclick="confirmPayment()">
+      Activer mon compte
+    </button>
+
+  </div>
+
+</div>
+
+<div class="card">
+
+  <h2>Historique des activations</h2>
+
+  <ul id="paymentList"></ul>
+
+</div>
+
+<div class="card">
+
+  <h2>Revenus de la plateforme</h2>
+
+  <div class="dashboard">
+
+    <div class="box">
+      <h3 id="totalPayments">0</h3>
+      <p>Activations</p>
+    </div>
+
+    <div class="box">
+      <h3 id="totalRevenue">0 USD</h3>
+      <p>Revenus</p>
+    </div>
+
+    <div class="box">
+      <h3 id="activeUsers">0</h3>
+      <p>Premium</p>
+    </div>
+
+  </div>
+
+</<!-- ===================================== -->
+<!-- AJOUTER CETTE PARTIE DANS index.html -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Activation Premium</h2>
+
+  <div class="premium-box">
+
+    <h3>Compte Premium Famille Mwamba</h3>
+
+    <p>
+      Pour accéder à toutes les fonctionnalités,
+      chaque membre doit activer son compte.
+    </p>
+
+    <div class="money-card">
+
+      <h1>0.2000 USD</h1>
+
+      <p>Paiement automatique intégré</p>
+
+      <strong>0993261118</strong>
+
+    </div>
+
+    <button onclick="confirmPayment()">
+      Activer mon compte
+    </button>
+
+  </div>
+
+</div>
+
+<div class="card">
+
+  <h2>Historique des activations</h2>
+
+  <ul id="paymentList"></ul>
+
+</div>
+
+<div class="card">
+
+  <h2>Revenus de la plateforme</h2>
+
+  <div class="dashboard">
+
+    <div class="box">
+      <h3 id="totalPayments">0</h3>
+      <p>Activations</p>
+    </div>
+
+    <div class="box">
+      <h3 id="totalRevenue">0 USD</h3>
+      <p>Revenus</p>
+    </div>
+
+    <div class="box">
+      <h3 id="activeUsers">0</h3>
+      <p>Premium</p>
+    </div>
+
+  </div>
+
+</div>/* ===================================== */
+/* AJOUTER DANS style.css */
+/* ===================================== */
+
+.premium-box{
+  text-align:center;
+}
+
+.money-card{
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  padding:20px;
+
+  border-radius:20px;
+
+  margin-top:15px;
+
+  color:white;
+}
+
+.money-card h1{
+  font-size:40px;
+  margin:0;
+}
+
+.money-card strong{
+  font-size:25px;
+}
+
+.payment-valid{
+  color:lime;
+  font-weight:bold;
+}
+
+.payment-wait{
+  color:orange;
+  font-weight:bold;
+}/* ===================================== */
+/* AJOUTER DANS style.css */
+/* ===================================== */
+
+.premium-box{
+  text-align:center;
+}
+
+.money-card{
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  padding:20px;
+
+  border-radius:20px;
+
+  margin-top:15px;
+
+  color:white;
+}
+
+.money-card h1{
+  font-size:40px;
+  margin:0;
+}
+
+.money-card strong{
+  font-size:25px;
+}
+
+.payment-valid{
+  color:lime;
+  font-weight:bold;
+}
+
+.payment-wait{
+  color:orange;
+  font-weight:bold;
+}/* ===================================== */
+/* AJOUTER DANS script.js */
+/* ===================================== */
+
+let payments = JSON.parse(
+  localStorage.getItem("payments")
+) || [];
+
+/* ACTIVATION AUTOMATIQUE */
+function confirmPayment(){
+
+  if(!currentUser){
+
+    showNotification(
+      "Connectez-vous"
+    );
+
+    return;
+  }
+
+  const alreadyPaid = payments.find(
+    pay => pay.user === currentUser.phone
+  );
+
+  if(alreadyPaid){
+
+    showNotification(
+      "Compte déjà activé"
+    );
+
+    return;
+  }
+
+  payments.push({
+
+    id: Date.now(),
+
+    user: currentUser.phone,
+
+    name: currentUser.name,
+
+    amount: 0.2,
+
+    status: "Validé"
+
+  });
+
+  localStorage.setItem(
+    "payments",
+    JSON.stringify(payments)
+  );
+
+  renderPayments();
+
+  updateFinance();
+
+  showNotification(
+    "Compte premium activé"
+  );
+}
+
+/* AFFICHER ACTIVATIONS */
+function renderPayments(){
+
+  const paymentList =
+    document.getElementById(
+      "paymentList"
+    );
+
+  paymentList.innerHTML = "";
+
+  payments.forEach(payment => {
+
+    paymentList.innerHTML += `
+
+      <li>
+
+        <strong>${payment.name}</strong>
+
+        <br>
+
+        ${payment.user}
+
+        <br><br>
+
+        Montant :
+        ${payment.amount} USD
+
+        <br><br>
+
+        <span class="payment-valid">
+          Compte activé
+        </span>
+
+      </li>
+    `;
+  });
+}
+
+/* STATISTIQUES */
+function updateFinance(){
+
+  const totalPayments =
+    payments.length;
+
+  const totalRevenue =
+    payments.reduce(
+      (sum,pay) =>
+        sum + pay.amount,
+      0
+    );
+
+  const activeUsers =
+    payments.length;
+
+  document.getElementById(
+    "totalPayments"
+  ).innerText = totalPayments;
+
+  document.getElementById(
+    "totalRevenue"
+  ).innerText =
+    totalRevenue.toFixed(4) + " USD";
+
+  document.getElementById(
+    "activeUsers"
+  ).innerText =
+    activeUsers;
+}
+
+/* LANCEMENT */
+renderPayments();
+<!-- ===================================== -->
+<!-- AJOUTER APRÈS LE CHAT -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Publications Familiales</h2>
+
+  <textarea
+    id="postText"
+    placeholder="Publier quelque chose..."
+    class="post-input"
+  ></textarea>
+
+  <input
+    type="file"
+    id="postImage"
+    accept="image/*"
+  >
+
+  <button onclick="createPost()">
+    Publier
+  </button>
+
+</div>
+
+<div class="card">
+
+  <h2>Actualités Familiales</h2>
+
+  <div id="postsContainer"></div>
+
+</<!-- ===================================== -->
+<!-- AJOUTER APRÈS LE CHAT -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Publications Familiales</h2>
+
+  <textarea
+    id="postText"
+    placeholder="Publier quelque chose..."
+    class="post-input"
+  ></textarea>
+
+  <input
+    type="file"
+    id="postImage"
+    accept="image/*"
+  >
+
+  <button onclick="createPost()">
+    Publier
+  </button>
+
+</div>
+
+<div class="card">
+
+  <h2>Actualités Familiales</h2>
+
+  <div id="postsContainer"></div>
+
+</div><!-- ===================================== -->
+<!-- AJOUTER APRÈS LE CHAT -->
+<!-- ===================================== -->
+
+<div class="card">
+
+  <h2>Publications Familiales</h2>
+
+  <textarea
+    id="postText"
+    placeholder="Publier quelque chose..."
+    class="post-input"
+  ></textarea>
+
+  <input
+    type="file"
+    id="postImage"
+    accept="image/*"
+  >
+
+  <button onclick="createPost()">
+    Publier
+  </button>
+
+</div>
+
+<div class="card">
+
+  <h2>Actualités Familiales</h2>
+
+  <div id="postsContainer"></div>
+
+</div>/* ===================================== */
+/* AJOUTER DANS style.css */
+/* ===================================== */
+
+.post-input{
+  width:100%;
+  min-height:100px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  padding:15px;
+  font-size:16px;
+}
+
+.post-card{
+  background:#334155;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+.post-card img{
+  width:100%;
+  border-radius:15px;
+  margin-top:10px;
+}
+
+.post-actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+}
+
+.like-btn{
+  background:#2563eb;
+}
+
+.comment-btn{
+  background:#16a34a;
+}
+
+.delete-post{
+  background:red;
+  margin-top:10px;
+}/* ===================================== */
+/* AJOUTER DANS script.js */
+/* ===================================== */
+
+let posts = JSON.parse(
+  localStorage.getItem("posts")
+) || [];
+
+/* CRÉER PUBLICATION */
+function createPost(){
+
+  if(!currentUser){
+
+    showNotification(
+      "Connectez-vous"
+    );
+
+    return;
+  }
+
+  const text =
+    document.getElementById(
+      "postText"
+    ).value;
+
+  const imageInput =
+    document.getElementById(
+      "postImage"
+    );
+
+  const file =
+    imageInput.files[0];
+
+  if(text === "" && !file){
+
+    showNotification(
+      "Ajoute un texte ou image"
+    );
+
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+
+    const newPost = {
+
+      id: Date.now(),
+
+      user: currentUser.name,
+
+      profile: currentUser.profile,
+
+      text: text,
+
+      image: file
+        ? reader.result
+        : "",
+
+      likes: 0,
+
+      comments: []
+
+    };
+
+    posts.unshift(newPost);
+
+    localStorage.setItem(
+      "posts",
+      JSON.stringify(posts)
+    );
+
+    renderPosts();
+
+    document.getElementById(
+      "postText"
+    ).value = "";
+
+    imageInput.value = "";
+
+    showNotification(
+      "Publication ajoutée"
+    );
+  };
+
+  if(file){
+    reader.readAsDataURL(file);
+  }else{
+    reader.onload();
+  }
+}
+
+/* AFFICHER PUBLICATIONS */
+function renderPosts(){
+
+  const container =
+    document.getElementById(
+      "postsContainer"
+    );
+
+  container.innerHTML = "";
+
+  posts.forEach(post => {
+
+    container.innerHTML += `
+
+      <div class="post-card">
+
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+        ">
+
+          <img
+            src="${post.profile}"
+            style="
+              width:50px;
+              height:50px;
+              border-radius:50%;
+              object-fit:cover;
+            "
+          >
+
+          <strong>${post.user}</strong>
+
+        </div>
+
+        <p>${post.text}</p>
+
+        ${
+          post.image
+          ? `
+          <img src="${post.image}">
+          `
+          : ""
+        }
+
+        <div class="post-actions">
+
+          <button
+            class="like-btn"
+            onclick="likePost(${post.id})"
+          >
+            👍 ${post.likes}
+          </button>
+
+          <button
+            class="comment-btn"
+            onclick="commentPost(${post.id})"
+          >
+            💬 ${post.comments.length}
+          </button>
+
+        </div>
+
+        ${
+          currentUser &&
+          (
+            currentUser.role === "admin" ||
+            currentUser.name === post.user
+          )
+
+          ? `
+          <button
+            class="delete-post"
+            onclick="deletePost(${post.id})"
+          >
+            Supprimer
+          </button>
+          `
+          : ""
+        }
+
+      </div>
+    `;
+  });
+}
+
+/* LIKE */
+function likePost(id){
+
+  const post = posts.find(
+    p => p.id === id
+  );
+
+  if(post){
+
+    post.likes++;
+
+    localStorage.setItem(
+      "posts",
+      JSON.stringify(posts)
+    );
+
+    renderPosts();
+  }
+}
+
+/* COMMENTAIRE */
+function commentPost(id){
+
+  const text = prompt(
+    "Votre commentaire"
+  );
+
+  if(!text){
+    return;
+  }
+
+  const post = posts.find(
+    p => p.id === id
+  );
+
+  if(post){
+
+    post.comments.push({
+      user: currentUser.name,
+      text
+    });
+
+    localStorage.setItem(
+      "posts",
+      JSON.stringify(posts)
+    );
+
+    renderPosts();
+
+    showNotification(
+      "Commentaire ajouté"
+    );
+  }
+}
+
+/* SUPPRIMER PUBLICATION */
+function deletePost(id){
+
+  posts = posts.filter(
+    post => post.id !== id
+  );
+
+  localStorage.setItem(
+    "posts",
+    JSON.stringify(posts)
+  );
+
+  renderPosts();
+
+  showNotification(
+    "Publication supprimée"
+  );
+}
+
+/* LANCEMENT */
+renderPosts();
